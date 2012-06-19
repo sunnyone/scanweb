@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"> 
+    <title>ScanWeb</title>
+    <link rel="stylesheet" href="jquery.mobile-1.1.0.min.css">
+    <script src="jquery-1.7.2.min.js"></script>
+    <script src="jquery.mobile-1.1.0.min.js"></script>
+  </head>
+  <body>
+ 
+    <div data-role="page" id="index">
+      <div data-role="header">
+      <h1>ScanWeb</h1><a href="./" data-icon="home" data-iconpos="notext" data-direction="reverse">Home</a>
+    </div>
+   
+   <%= h @message %> <br>
+   
+   <% unless @success then %>
+     ログは以下の通りです。
+     <pre><code>
+       <%= h @log_text %>
+     </code></pre>
+   <% else %>
+     <%= @basename %>
+     <a href="#" data-role="button" data-inline="true" data-icon="arrow-l">前ページ</a>
+     <a href="#" data-role="button" data-inline="true" data-icon="arrow-r">次ページ</a>
+   <% end %>
+   
+   <br />
+
+   <a href="./" data-role="button" data-inline="true">戻る</a>
+  </body>
+</html>
+
+  
