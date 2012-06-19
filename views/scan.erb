@@ -23,7 +23,7 @@
          <h3>プレビュー</h3>
          <div class="thumbnails">
            <% (1..@thumb_count).each do |num| %>
-               <img src="<%= %Q(./image/#{@basename}/#{num}) %>"  alt="Page <%= num %>" width="200" />
+               <img src="<%= %Q(./image/#{@basename}/#{num}) %>"  alt="Page <%= num %>" />
            <% end %>
          </div>
        <% end %>

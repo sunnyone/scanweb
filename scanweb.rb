@@ -141,7 +141,7 @@ get '/image/:basename/:number' do
   basename = params[:basename]
   number = params[:number]
   
-  unless basename =~ /^[a-zA-Z0-9]+$/ &&
+  unless basename =~ /^[-a-zA-Z0-9]+$/ &&
               number =~ /^[0-9]+$/ then
     redirect '/invalid'
   end
