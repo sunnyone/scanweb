@@ -76,15 +76,16 @@ post '/scan' do
   ##if true
     @success = true
     @message = 'スキャンが完了しました。'
-    @basename = basename
   else
     @success = false
     @message = 'スキャンに失敗しました。'
-    if File.exists?(path_table[:log_path]) then
-      @log_text = File.read(path_table[:log_path])
-    else
-      @log_text = 'ログファイルが見つかりません。'
-    end
+  end
+
+  @basename = basename
+  if File.exists?(path_table[:log_path]) then
+    @log_text = File.read(path_table[:log_path])
+  else
+    @log_text = 'ログファイルが見つかりません。'
   end
   
   erb :scan
