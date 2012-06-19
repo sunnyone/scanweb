@@ -66,6 +66,7 @@ post '/scan' do
   end
 
   basename = create_basename()
+  ##basename = "base"
   path_table = create_path_table(basename)
   
   ##File.open(path_table[:log_path], "w") do |fp|
@@ -90,7 +91,36 @@ post '/scan' do
     @log_text = 'ログファイルが見つかりません。'
   end
   
+  @thumb_count = get_thumb_count(path_table[:thumbs_path])
+  
   erb :scan
+end
+
+def get_thumb_count(thumbs_path)
+  filelist = get_zip_filelist(thumbs_path)
+  
+  count = 0
+  (1..9999).each do |i|
+    unless filelist.member?("thumb%04d.jpg" % i)
+       break
+    end
+    
+    count = i
+  end
+
+  count
+end
+
+def get_zip_filelist(zip_filename)
+  filelist = []
+  
+  Zip::ZipInputStream.open(zip_filename) do |stream|
+    while entry = stream.get_next_entry()
+      filelist << entry.name
+    end
+  end
+  
+  filelist
 end
 
 def get_zip_data(zip_filename, entry_filename)
