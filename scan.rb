@@ -1,6 +1,6 @@
 #!/usr/bin/ruby
 
-require 'rubygems'
+##require 'rubygems'
 require 'sinatra'
 
 SCANWEB_HOME = File.dirname(__FILE__)
@@ -65,7 +65,7 @@ post '/scan' do
   ##File.open(path_table[:log_path], "w") do |fp|
   ##  fp.puts("TEXT!")
   ##end
-  system(%Q(#{SCRIPT_FILE} "#{pdf_path}" "#{log_path}" "#{thumbs_path}" "#{source}" "#{mode}" "#{resolution}"))
+  system(%Q(#{SCRIPT_FILE} "#{path_table[:pdf_path]}" "#{path_table[:log_path]}" "#{path_table[:thumbs_path]}" "#{source}" "#{mode}" "#{resolution}"))
   
   # If output exists, treat as scanning is succeeded.
   if File.exists?(path_table[:pdf_path]) then
@@ -76,7 +76,11 @@ post '/scan' do
   else
     @success = false
     @message = 'スキャンに失敗しました。'
-    @log_text = File.read(path_table[:log_path])
+    if File.exists?(path_table[:log_path]) then
+      @log_text = File.read(path_table[:log_path])
+    else
+      @log_text = 'ログファイルが見つかりません。'
+    end
   end
   
   erb :scan
