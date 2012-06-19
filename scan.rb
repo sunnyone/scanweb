@@ -3,11 +3,15 @@
 ##require 'rubygems'
 require 'sinatra'
 
+## Configuration
 SCANWEB_HOME = File.dirname(__FILE__)
 SCRIPT_FILE = SCANWEB_HOME + "/scan.sh"
 OUTPUT_DIR = '/export/work/scan'
 #OUTPUT_DIR = 'c:/temp/scan'
 
+set :port, 10080
+
+## 
 def create_path_table(basename)
   { 
     :pdf_path => "#{OUTPUT_DIR}/#{basename}.pdf",
