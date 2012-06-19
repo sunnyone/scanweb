@@ -1,4 +1,2 @@
-scanweb
+scanweb - Web Interface for Scanner
 =======
-
-Web Interface for Scanner

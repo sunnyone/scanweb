@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"> 
+    <title>ScanWeb</title>
+    <link rel="stylesheet" href="jquery.mobile-1.1.0.min.css">
+    <script src="jquery-1.7.2.min.js"></script>
+    <script src="jquery.mobile-1.1.0.min.js"></script>
+  </head>
+  <body>
+ 
+    <div data-role="page" id="index">
+      <div data-role="header">
+      <h1>ScanWeb</h1><a href="/" data-icon="home" data-iconpos="notext" data-direction="reverse">Home</a>
+      </div>
+   
+   <span id="message"></span>
+   
+   <form method="POST" action="/doscan" >
+ 
+     <div data-role="fieldcontain">
+       <fieldset data-role="controlgroup" data-type="horizontal"> 
+         <legend>面</legend> 
+      
+         <input type="radio" name="source" value="ADF Duplex" id="adf_duplex"  checked="checked" />
+         <label for="adf_duplex">両面</label>
+      
+         <input type="radio" name="source" value="ADF Front" id="adf_front" />
+         <label for="adf_front">表面</label>
+      
+         <input type="radio" name="source" value="ADF Back" id="adf_back" />
+         <label for="adf_back">裏面</label>
+       </fieldset>
+     </div>
+
+     <div data-role="fieldcontain">
+       <fieldset data-role="controlgroup" data-type="horizontal"> 
+         <legend>色</legend>
+      
+         <input type="radio" name="mode" value="Color" id="mode_color" checked="checked" />
+         <label for="mode_color">カラー</label>
+       
+         <input type="radio" name="mode" value="Gray" id="mode_gray" />
+         <label for="mode_gray">白黒</label>
+       </fieldset>
+     </div>
+
+     <div data-role="fieldcontain">
+       <fieldset data-role="controlgroup">
+        <legend>解像度</legend>
+      
+        <input type="radio" name="resolution" value="100"  id="resolution_100" />
+        <label for="resolution_100">100</label>
+      
+        <input type="radio" name="resolution" value="150"  id="resolution_150" />
+        <label for="resolution_150">150</label>
+      
+        <input type="radio" name="resolution" value="180"  id="resolution_180" />
+        <label for="resolution_180">180</label>
+      
+        <input type="radio" name="resolution" value="190"  id="resolution_190" checked="checked" />
+        <label for="resolution_190">190</label>
+      
+        <input type="radio" name="resolution" value="200"  id="resolution_200" />
+        <label for="resolution_200">200</label>
+      
+        <input type="radio" name="resolution" value="300"  id="resolution_300" />
+        <label for="resolution_300">300</label>
+     </fieldset>
+    </div>
+   
+    <input type="submit" value="スキャン" data-inline="true" />
+  </div>
+  
+  </body>
+ </html>
+ 
