@@ -2,12 +2,14 @@
 
 ##require 'rubygems'
 require 'sinatra'
+require 'zip/zipfilesystem'
 
 ## Configuration
 SCANWEB_HOME = File.dirname(__FILE__)
 SCRIPT_FILE = SCANWEB_HOME + "/scan.sh"
 OUTPUT_DIR = '/export/work/scan'
 #OUTPUT_DIR = 'c:/temp/scan'
+#OUTPUT_DIR='/tmp/scan'
 
 set :port, 10080
 
@@ -91,13 +93,42 @@ post '/scan' do
   erb :scan
 end
 
-get '/image/:basename' do
-  basename = params[:basename]
+def get_zip_data(zip_filename, entry_filename)
+  data = nil
   
-  unless basename =~ /^[a-zA-Z0-9]+$/ then
+  Zip::ZipInputStream.open(zip_filename) do |stream|
+    while entry = stream.get_next_entry()
+      next unless entry_filename == entry.name
+    
+      data = stream.read()
+    end
+  end
+
+  data
+end
+
+get '/image/:basename/:number' do
+  basename = params[:basename]
+  number = params[:number]
+  
+  unless basename =~ /^[a-zA-Z0-9]+$/ &&
+              number =~ /^[0-9]+$/ then
     redirect '/invalid'
   end
   
-  return basename
+  path_table = create_path_table(basename)
+  unless File.exists?(path_table[:thumbs_path]) then
+     return "サムネイルファイルが見つかりません"
+  end
+  
+  image_filename = "thumb%04d.jpg" % number
+  image_bytes = get_zip_data(path_table[:thumbs_path], image_filename)
+
+  unless image_bytes then
+    return "指定番号がありません"
+  end
+  
+  content_type 'image/jpeg'
+  image_bytes
 end
 
