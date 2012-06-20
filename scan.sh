@@ -14,7 +14,7 @@ RESOLUTION="$6"
 
 TMPDIR=/var/cache/scan/scanweb.$$
 LOGFILE=$TMPDIR/scan.log
-THUMBSIZE=450x800
+THUMBSIZE=280x362
 
 /bin/mkdir -p $TMPDIR
 cd $TMPDIR
