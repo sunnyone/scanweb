@@ -79,6 +79,7 @@ post '/scan' do
   ##if true
     @success = true
     @message = 'スキャンが完了しました。'
+    @thumb_count = get_thumb_count(path_table[:thumbs_path])
   else
     @success = false
     @message = 'スキャンに失敗しました。'
@@ -91,7 +92,6 @@ post '/scan' do
     @log_text = 'ログファイルが見つかりません。'
   end
   
-  @thumb_count = get_thumb_count(path_table[:thumbs_path])
   
   erb :scan
 end
